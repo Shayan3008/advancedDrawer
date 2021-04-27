@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.proc">
+    package="com.example.drawer">
    <application
-        android:label="proc"
+        android:label="drawer"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
