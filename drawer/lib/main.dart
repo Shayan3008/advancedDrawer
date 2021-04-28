@@ -62,18 +62,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               },
               onHorizontalDragUpdate: (details) {
                 if (drag) {
-                  var delta = details.primaryDelta! / 0.5;
+                  var delta = details.primaryDelta! / 150;
                   controller.value += delta;
                   print(delta);
                   print(controller.value);
-                  toggle();
                 }
               },
               onHorizontalDragCancel: () {
                 if (controller.isDismissed || controller.isCompleted) return;
-                if (controller.value == 1 || controller.value == 0)
-                  controller.reset();
-                
+                // if (controller.value == 1 || controller.value == 0)
+                // controller.reset();
+                toggle();
               },
               child: Transform(
                 transform: Matrix4.identity()
