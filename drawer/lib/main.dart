@@ -55,28 +55,28 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               onHorizontalDragStart: (DragStartDetails dragStartDetails) {
                 bool choice1 = controller.isDismissed &&
                     dragStartDetails.globalPosition.dx > 0;
-                bool choice2 = controller.isDismissed &&
+                bool choice2 = controller.isCompleted &&
                     dragStartDetails.globalPosition.dx < 0;
                 drag = choice1 || choice2;
-                print(drag);
+                // print(drag);
               },
               onHorizontalDragUpdate: (details) {
                 if (drag) {
-                  var delta = details.primaryDelta! / 150;
+                  var delta = details.primaryDelta! / 180;
                   controller.value += delta;
-                  print(delta);
+                  // print(delta);
                   print(controller.value);
                 }
               },
-              onHorizontalDragCancel: () {
+              onHorizontalDragEnd: (details) {
                 if (controller.isDismissed || controller.isCompleted) return;
-                // if (controller.value == 1 || controller.value == 0)
-                // controller.reset();
-                toggle();
+                controller.value >= 0.5
+                    ? controller.forward()
+                    : controller.reverse();
               },
               child: Transform(
                 transform: Matrix4.identity()
-                  ..translate(150 * controller.value)
+                  ..translate(180 * controller.value)
                   ..scale(1 - (controller.value * 0.3)),
                 alignment: Alignment.center,
                 child: Container(
